@@ -1,0 +1,80 @@
+<footer class="footer">
+  <div class="footer-grid rv">
+    <div>
+      <div class="f-logo-n">Иван Квитка</div>
+      <div class="f-logo-s">Депутат ГД VIII созыва · Тюменская область · Единая Россия</div>
+      <div class="f-socs">
+        <a class="f-soc" href="#"><svg viewBox="0 0 24 24"><path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.586-1.496c.598-.19 1.366 1.26 2.182 1.816.616.416 1.082.324 1.082.324l2.17-.03s1.136-.07.598-1.068c-.044-.073-.312-.656-1.604-1.854-1.354-1.254-1.172-1.052.458-3.224.994-1.32 1.392-2.128 1.268-2.472-.118-.33-.852-.243-.852-.243l-2.442.015s-.182-.025-.316.056c-.13.079-.214.264-.214.264s-.386 1.02-.9 1.886c-1.086 1.844-1.52 1.942-1.698 1.83-.412-.268-.31-1.07-.31-1.64 0-1.782.27-2.524-.526-2.716-.264-.064-.458-.106-1.134-.114-.866-.008-1.598.004-2.014.206-.276.135-.49.436-.36.453.16.021.522.098.714.36.248.34.24 1.104.24 1.104s.142 2.098-.334 2.36c-.327.178-.776-.186-1.738-1.854-.494-.854-.868-1.8-.868-1.8s-.072-.18-.198-.276c-.152-.117-.366-.154-.366-.154l-2.318.015s-.348.01-.476.16C4.56 8.127 4.648 8.44 4.648 8.44s1.814 4.25 3.872 6.392c1.886 1.964 4.026 1.836 4.026 1.836l1.238-.027z"/></svg></a>
+        <a class="f-soc" href="#"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.75 14.384l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.832.953l-.766-.75z"/></svg></a>
+        <a class="f-soc" href="#"><svg viewBox="0 0 24 24"><path d="M12 1C5.924 1 1 5.924 1 12s4.924 11 11 11 11-4.924 11-11S18.076 1 12 1zm0 5.115a2.885 2.885 0 1 1 0 5.77 2.885 2.885 0 0 1 0-5.77zm0 7.77c2.276 0 4.353.938 5.847 2.453l-1.47 1.47a6.058 6.058 0 0 0-4.377-1.837 6.058 6.058 0 0 0-4.377 1.837l-1.47-1.47A8.06 8.06 0 0 1 12 13.885z"/><circle cx="12" cy="9" r="1.5"/></svg></a>
+      </div>
+    </div>
+    <div class="f-col"><div class="f-col-title">Разделы</div><a href="#news">Новости</a><a href="#video">Видео</a><a href="#gallery">Фотоархив</a><a href="#bio">Биография</a><a href="#initiatives">Инициативы</a><a href="#press">Пресс-центр</a></div>
+    <div class="f-col"><div class="f-col-title">Контакты</div><a href="tel:+73452000000">+7 (3452) 00-00-00</a><a href="mailto:priemnaya@kvitka72.ru">priemnaya@kvitka72.ru</a><a href="#">г. Тюмень, ул. Республики, 52</a><a href="#">Вт, Чт: 10:00–17:00</a></div>
+    <div class="f-col"><div class="f-col-title">Документы</div><a href="#">Политика конфиденциальности</a><a href="#">Персональные данные</a><a href="#">Пресс-кит (PDF)</a></div>
+  </div>
+  <div class="footer-bottom"><div class="f-copy">© 2026 Иван Квитка · Официальный сайт депутата ГД ФС РФ</div><div class="f-policy"><a href="#">Конфиденциальность</a><a href="#">Персональные данные</a></div></div>
+</footer>
+
+<script>
+const burger=document.getElementById('burgerBtn');
+const mobMenu=document.getElementById('mobMenu');
+burger.addEventListener('click',()=>mobMenu.classList.toggle('open'));
+function closeMob(){mobMenu.classList.remove('open')}
+function toggleSearch(){const sb=document.getElementById('searchBar');sb.classList.toggle('open');if(sb.classList.contains('open'))sb.querySelector('input').focus()}
+function scrollToContact(){document.getElementById('contact').scrollIntoView({behavior:'smooth'})}
+
+// Reveal
+const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*55)}})},{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Count-up
+function countUp(el,to,dur=1500){const suf=el.querySelector('.suf')?el.querySelector('.suf').outerHTML:'';let s=null;(function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/dur,1),v=Math.round(p*p*to);el.innerHTML=v+suf;if(p<1)requestAnimationFrame(step);else el.innerHTML=to+suf})()}
+const co=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){const t=parseInt(e.target.dataset.count);if(t)countUp(e.target,t);co.unobserve(e.target)}})},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+
+// News filter
+function filterNews(cat,btn){document.querySelectorAll('#newsTags .tag').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#newsGrid .news-card').forEach(c=>{c.classList.toggle('hidden',cat!=='all'&&c.dataset.cat!==cat)})}
+
+// Video
+function openVid(t){document.getElementById('vidModal').classList.add('open');document.getElementById('vidTtl').textContent=t;document.body.style.overflow='hidden'}
+function closeVid(){document.getElementById('vidModal').classList.remove('open');document.body.style.overflow=''}
+
+// Gallery
+const lbLabels=['Государственная Дума, рабочий кабинет','Пленарное заседание','Встреча с представителями региона','Выступление на трибуне','Поздравление с праздником','Награждение участников','Встреча с жителями области','Предварительное голосование','Церемония вручения наград','Встреча с журналистами','Приём граждан','Рабочая поездка по региону'];
+let lbIdx=0;
+function openLb(i){lbIdx=i;document.getElementById('lbModal').classList.add('open');document.body.style.overflow='hidden';updLb()}
+function closeLb(){document.getElementById('lbModal').classList.remove('open');document.body.style.overflow=''}
+function prevLb(){lbIdx=(lbIdx-1+12)%12;updLb()}
+function nextLb(){lbIdx=(lbIdx+1)%12;updLb()}
+function updLb(){document.getElementById('lbImg').textContent=lbLabels[lbIdx];document.getElementById('lbCtr').textContent=(lbIdx+1)+' / 12'}
+document.getElementById('lbModal').addEventListener('click',function(e){if(e.target===this)closeLb()});
+document.getElementById('vidModal').addEventListener('click',function(e){if(e.target===this)closeVid()});
+
+// Form steps
+function goStep(n){
+  if(n===2&&!document.getElementById('fName').value.trim()){alert('Пожалуйста, заполните ваше имя');return}
+  if(n===3){
+    const topic=document.getElementById('fTopic').value,text=document.getElementById('fText').value.trim();
+    if(!topic||!text){alert('Выберите тему и заполните текст обращения');return}
+    document.getElementById('cName').textContent=document.getElementById('fName').value||'—';
+    document.getElementById('cPhone').textContent=document.getElementById('fPhone').value||'—';
+    document.getElementById('cEmail').textContent=document.getElementById('fEmail').value||'—';
+    document.getElementById('cTopic').textContent=topic;
+  }
+  document.querySelectorAll('.s-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('sp'+n).classList.add('active');
+  for(let i=1;i<=3;i++){const b=document.getElementById('sb'+i);b.classList.remove('active','done');if(i<n)b.classList.add('done');if(i===n)b.classList.add('active')}
+}
+function submitForm(){document.querySelectorAll('.s-panel').forEach(p=>p.classList.remove('active'));const fc=document.getElementById('fConfirm');fc.style.display='block';document.getElementById('fNum').textContent='КВ-2026-'+Math.floor(1000+Math.random()*9000)}
+
+// Float CTA scroll
+const fc=document.getElementById('floatCta');
+window.addEventListener('scroll',()=>{const show=window.scrollY>400;fc.style.opacity=show?'1':'0';fc.style.pointerEvents=show?'all':'none'});
+fc.style.transition='opacity .35s,transform .2s,background .2s';
+
+// Keyboard
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeVid();closeLb();closeMob();document.getElementById('searchBar').classList.remove('open')}if(document.getElementById('lbModal').classList.contains('open')){if(e.key==='ArrowLeft')prevLb();if(e.key==='ArrowRight')nextLb()}});
+</script>
+</body>
+</html>
